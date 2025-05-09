@@ -19,12 +19,10 @@ public class DepositTransaction implements Transaction {
     
     @Override
     public AccountEntity execute() {
-        // Validate amount
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Deposit amount must be positive");
         }
-        
-        // Perform deposit operation
+
         BigDecimal newBalance = account.getBalance().add(amount);
         account.setBalance(newBalance);
         
