@@ -5,9 +5,6 @@ import apiabstractmethod.request.AccountRequest;
 import apiabstractmethod.response.AccountResponse;
 import org.springframework.stereotype.Component;
 
-/**
- * Mapper for converting between Account entities and DTOs.
- */
 @Component
 public class AccountMapper {
     

@@ -3,9 +3,6 @@ package apiabstractmethod.service;
 import apiabstractmethod.model.entity.AccountEntity;
 import java.math.BigDecimal;
 
-/**
- * Service interface for processing financial transactions.
- */
 public interface TransactionService {
     
     /**

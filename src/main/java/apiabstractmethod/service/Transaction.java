@@ -3,10 +3,6 @@ package apiabstractmethod.service;
 import apiabstractmethod.model.entity.AccountEntity;
 import java.math.BigDecimal;
 
-/**
- * Abstract Product interface in the Abstract Method pattern.
- * Defines the operations that all transaction types must implement.
- */
 public interface Transaction {
     
     /**

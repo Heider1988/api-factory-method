@@ -5,9 +5,6 @@ import apiabstractmethod.service.Transaction;
 import lombok.Getter;
 import java.math.BigDecimal;
 
-/**
- * Concrete Product implementation for withdrawal transactions.
- */
 @Getter
 public class WithdrawalTransaction implements Transaction {
     

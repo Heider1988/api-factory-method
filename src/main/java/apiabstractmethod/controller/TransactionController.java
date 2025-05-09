@@ -10,9 +10,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * REST controller for transaction operations.
- */
 @RestController
 @RequestMapping("/api/transactions")
 @Tag(name = "Transaction API", description = "Endpoints for processing financial transactions")

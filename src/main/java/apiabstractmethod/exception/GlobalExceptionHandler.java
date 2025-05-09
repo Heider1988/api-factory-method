@@ -10,10 +10,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Global exception handler for the API.
- * Provides consistent error responses for different types of exceptions.
- */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     

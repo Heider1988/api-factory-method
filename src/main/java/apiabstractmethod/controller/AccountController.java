@@ -16,9 +16,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * REST controller for account operations.
- */
 @RestController
 @RequestMapping("/api/accounts")
 @Tag(name = "Account API", description = "Endpoints for managing bank accounts")

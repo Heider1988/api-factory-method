@@ -6,9 +6,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-/**
- * DTO for transaction response.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

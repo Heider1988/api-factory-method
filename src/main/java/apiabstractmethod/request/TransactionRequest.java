@@ -9,9 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-/**
- * DTO for processing a transaction.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

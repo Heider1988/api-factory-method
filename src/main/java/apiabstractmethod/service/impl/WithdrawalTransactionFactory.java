@@ -6,9 +6,6 @@ import apiabstractmethod.service.TransactionFactory;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 
-/**
- * Concrete Factory implementation for creating withdrawal transactions.
- */
 @Service
 public class WithdrawalTransactionFactory implements TransactionFactory {
     

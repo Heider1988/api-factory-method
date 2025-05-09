@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-/**
- * DTO for account response.
- */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
