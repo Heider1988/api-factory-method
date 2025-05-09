@@ -10,7 +10,7 @@ public class WithdrawalTransaction implements Transaction {
     
     private final BigDecimal amount;
     private final AccountEntity account;
-    private final String type = "WITHDRAWAL";
+    private static final String TYPE = "WITHDRAWAL";
     
     public WithdrawalTransaction(BigDecimal amount, AccountEntity account) {
         this.amount = amount;
@@ -19,17 +19,14 @@ public class WithdrawalTransaction implements Transaction {
     
     @Override
     public AccountEntity execute() {
-        // Validate amount
         if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Withdrawal amount must be positive");
         }
-        
-        // Check if sufficient funds are available
+
         if (account.getBalance().compareTo(amount) < 0) {
             throw new IllegalArgumentException("Insufficient funds for withdrawal");
         }
-        
-        // Perform withdrawal operation
+
         BigDecimal newBalance = account.getBalance().subtract(amount);
         account.setBalance(newBalance);
         
@@ -38,6 +35,6 @@ public class WithdrawalTransaction implements Transaction {
     
     @Override
     public String getType() {
-        return type;
+        return TYPE;
     }
 }
