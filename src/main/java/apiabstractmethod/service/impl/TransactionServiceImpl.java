@@ -35,7 +35,7 @@ public class TransactionServiceImpl implements TransactionService {
         AccountEntity account = accountRepository.findByAccountNumber(accountNumber)
                 .orElseThrow(() -> new IllegalArgumentException("Account not found: " + accountNumber));
 
-        TransactionFactory factory = transactionFactories.get(transactionType);
+        TransactionFactory factory = transactionFactories.get(transactionType.toUpperCase());
         if (factory == null) {
             throw new IllegalArgumentException("Unsupported transaction type: " + transactionType);
         }
