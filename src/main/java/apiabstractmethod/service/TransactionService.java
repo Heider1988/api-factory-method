@@ -1,11 +1,11 @@
 package apiabstractmethod.service;
 
-import apiabstractmethod.model.entity.AccountEntity;
-import java.math.BigDecimal;
+import apiabstractmethod.request.TransactionRequest;
+import apiabstractmethod.response.TransactionResponse;
 
 public interface TransactionService {
 
-    AccountEntity processTransaction(String transactionType, String accountNumber, BigDecimal amount);
+    TransactionResponse processTransaction(TransactionRequest request);
 
     String[] getAvailableTransactionTypes();
 }
