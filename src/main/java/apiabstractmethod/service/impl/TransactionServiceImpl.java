@@ -2,13 +2,14 @@ package apiabstractmethod.service.impl;
 
 import apiabstractmethod.model.entity.AccountEntity;
 import apiabstractmethod.repository.AccountRepository;
+import apiabstractmethod.request.TransactionRequest;
+import apiabstractmethod.response.TransactionResponse;
 import apiabstractmethod.service.Transaction;
 import apiabstractmethod.service.TransactionFactory;
 import apiabstractmethod.service.TransactionService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
-    
+
     private final AccountRepository accountRepository;
     private final Map<String, TransactionFactory> transactionFactories;
 
@@ -28,24 +29,36 @@ public class TransactionServiceImpl implements TransactionService {
                         Function.identity()
                 ));
     }
-    
+
     @Override
     @Transactional
-    public AccountEntity processTransaction(String transactionType, String accountNumber, BigDecimal amount) {
-        AccountEntity account = accountRepository.findByAccountNumber(accountNumber)
-                .orElseThrow(() -> new IllegalArgumentException("Account not found: " + accountNumber));
+    public TransactionResponse processTransaction(TransactionRequest request) {
 
-        TransactionFactory factory = transactionFactories.get(transactionType.toUpperCase());
+        AccountEntity account = accountRepository.findByAccountNumber(request.getAccountNumber())
+                .orElseThrow(() -> new IllegalArgumentException("Account not found: " + request.getAccountNumber()));
+
+        TransactionFactory factory = transactionFactories.get(request.getTransactionType().toUpperCase());
         if (factory == null) {
-            throw new IllegalArgumentException("Unsupported transaction type: " + transactionType);
+            throw new IllegalArgumentException("Unsupported transaction type: " + request.getTransactionType());
         }
 
-        Transaction transaction = factory.createTransaction(amount, account);
+        Transaction transaction = factory.createTransaction(request.getAmount(), account);
         AccountEntity updatedAccount = transaction.execute();
 
-        return accountRepository.save(updatedAccount);
+        accountRepository.save(updatedAccount);
+
+        return new TransactionResponse(
+                updatedAccount.getAccountType(),
+                updatedAccount.getAccountNumber(),
+                request.getAmount(),
+                updatedAccount.getBalance(),
+                "SUCCESS",
+                "Transaction processed successfully") {
+
+        };
     }
-    
+
+
     @Override
     public String[] getAvailableTransactionTypes() {
         return transactionFactories.keySet().toArray(new String[0]);
